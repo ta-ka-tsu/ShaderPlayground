@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="4Tt-XO-UA9">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="gg2-ES-j1t">
+            <objects>
+                <viewController id="1jf-Hi-mEb" customClass="ViewController" customModule="ShaderPlayground" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Q9t-ef-HET">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mtkView contentMode="scaleToFill" colorPixelFormat="BGRA8Unorm" depthStencilPixelFormat="Depth32Float" translatesAutoresizingMaskIntoConstraints="NO" id="0Xv-R2-5HX">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="zxm-na-pj4" appends="YES" id="Rxt-dx-YGO"/>
+                                </connections>
+                            </mtkView>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="0Xv-R2-5HX" firstAttribute="top" secondItem="1PI-6G-RJk" secondAttribute="top" id="0N3-uX-B08"/>
+                            <constraint firstItem="0Xv-R2-5HX" firstAttribute="leading" secondItem="1PI-6G-RJk" secondAttribute="leading" id="0x9-uG-KG4"/>
+                            <constraint firstItem="0Xv-R2-5HX" firstAttribute="trailing" secondItem="1PI-6G-RJk" secondAttribute="trailing" id="cij-xx-QKS"/>
+                            <constraint firstItem="0Xv-R2-5HX" firstAttribute="bottom" secondItem="1PI-6G-RJk" secondAttribute="bottom" id="f7F-qq-mkt"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="1PI-6G-RJk"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="akP-J2-Ifz"/>
+                    <connections>
+                        <outlet property="metalView" destination="0Xv-R2-5HX" id="gpy-W2-QRp"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LVi-YT-kwv" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="zxm-na-pj4">
+                    <connections>
+                        <action selector="onTapGesture:" destination="1jf-Hi-mEb" id="HqO-mF-pk3"/>
+                    </connections>
+                </tapGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="-12218" y="118"/>
+        </scene>
+        <!--Editor View Controller-->
+        <scene sceneID="UnG-lh-C1S">
+            <objects>
+                <viewController id="H5L-Xr-Xre" customClass="EditorViewController" customModule="ShaderPlayground" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="fpN-fi-c9d">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="ORq-zL-DSA">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <string key="text">#include &lt;metal_stdlib&gt;
+using namespace metal;
+
+fragment half4 offline_fragment(){
+    return half4(0.0, 1.0, 0.0, 1.0);
+}</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" spellCheckingType="no"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="ORq-zL-DSA" firstAttribute="centerX" secondItem="fpN-fi-c9d" secondAttribute="centerX" id="CDC-or-so1"/>
+                            <constraint firstItem="ORq-zL-DSA" firstAttribute="bottom" secondItem="qt1-Bm-vsp" secondAttribute="bottom" id="FjL-24-V6U"/>
+                            <constraint firstItem="ORq-zL-DSA" firstAttribute="top" secondItem="qt1-Bm-vsp" secondAttribute="top" id="QJg-95-5Us"/>
+                            <constraint firstItem="ORq-zL-DSA" firstAttribute="leading" secondItem="qt1-Bm-vsp" secondAttribute="leading" id="URY-An-BSw"/>
+                            <constraint firstItem="ORq-zL-DSA" firstAttribute="trailing" secondItem="qt1-Bm-vsp" secondAttribute="trailing" id="oLW-5g-80r"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="qt1-Bm-vsp"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="HrM-Fi-jvb">
+                        <barButtonItem key="rightBarButtonItem" title="Compile&amp;Run" id="cXN-rO-gXi">
+                            <connections>
+                                <action selector="compileAndRun:" destination="H5L-Xr-Xre" id="let-RA-CkG"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="bottomConstraint" destination="FjL-24-V6U" id="cJM-uv-o3K"/>
+                        <outlet property="textView" destination="ORq-zL-DSA" id="Ybt-NX-ZDO"/>
+                        <segue destination="1jf-Hi-mEb" kind="show" identifier="compileRunSegue" id="3Pa-5h-xED">
+                            <nil key="action"/>
+                        </segue>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VdB-Tr-Xtl" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-13038" y="117"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="4YY-13-wqg">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="4Tt-XO-UA9" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="vvu-ov-B9O">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="H5L-Xr-Xre" kind="relationship" relationship="rootViewController" id="k4u-UI-bh0"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gen-ES-2o8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-13922" y="117"/>
+        </scene>
+    </scenes>
+</document>

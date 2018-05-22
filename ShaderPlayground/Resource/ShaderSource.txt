@@ -1,0 +1,41 @@
+#include <metal_stdlib>
+using namespace metal;
+
+struct VertexOut {
+  float4 pos [[position]];
+};
+
+vertex VertexOut vertexShader(
+  const device packed_float2* vertex_array [[ buffer(0) ]],
+  unsigned int vid [[ vertex_id ]])
+{
+  VertexOut v;
+  v.pos = float4(vertex_array[vid], 1.0, 1.0);
+  return v;
+}
+
+float circle(float2 p)
+{
+  return step(length(p - 0.5), 0.5);
+}
+
+float star(float2 p, float time)
+{
+  float2 c = p - 0.5;
+  float a = atan2(c.y, c.x) + time;
+  return step(length(c) + 0.1*sin(5.0*a) + 0.1, 0.5);
+}
+
+fragment half4 fragmentShader(
+  VertexOut fragmentIn [[stage_in]],
+  constant float2 &res[[buffer(0)]],
+  constant float &time[[buffer(1)]])
+{
+  float2 p = fragmentIn.pos.xy/min(res.x, res.y);
+  float2 p1 = fract(p * 5.0);
+  return half4(star(p1, time),
+               star(p1, sin(time)),
+               star(p1, 2.0*time),
+               1.0);
+}
+
