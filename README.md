@@ -13,5 +13,5 @@ iPhone上でMSLをコンパイル＆実行できます。
 
 ## Screen Shot
 
-<img src=“README_resources/editor.jpg”>
-<img src=“README_resources/viewer.jpg”>
+<img src=“https://github.com/ta-ka-tsu/ShaderPlayground/blob/master/README_resources/editor.jpg”>
+<img src=“https://github.com/ta-ka-tsu/ShaderPlayground/blob/master/README_resources/viewer.jpg”>
