@@ -12,6 +12,8 @@ import MetalKit
 import AVFoundation
 import CoreMotion
 
+typealias Acceleration = float3
+
 class ViewController: UIViewController {
     
     @IBOutlet weak var metalView: MTKView!
@@ -33,7 +35,7 @@ class ViewController: UIViewController {
     let startDate = Date()
     
     var volumeLevel : Float = 0.0
-    var acceleration : CMAcceleration = CMAcceleration()
+    var acceleration = Acceleration(x:0.0, y:0.0, z:0.0)
     var motionManager = CMMotionManager()
     
     private let captureSession = AVCaptureSession()
@@ -76,7 +78,7 @@ class ViewController: UIViewController {
         resolutionBuffer = device.makeBuffer(length: 2 * MemoryLayout<Float>.size, options: [])
         timeBuffer = device.makeBuffer(length: MemoryLayout<Float>.size, options: [])
         volumeBuffer = device.makeBuffer(length: MemoryLayout<Float>.size, options: [])
-        accelerationBuffer = device.makeBuffer(length: 3 * MemoryLayout<Float>.size, options: [])
+        accelerationBuffer = device.makeBuffer(length: MemoryLayout<Acceleration>.size, options: [])
     }
     
     func setUpAudioInput() {
@@ -118,9 +120,10 @@ class ViewController: UIViewController {
         self.motionManager.accelerometerUpdateInterval = 1.0/60.0
         self.motionManager.startDeviceMotionUpdates(to: OperationQueue.current!) { [weak `self`](motion, error) in
             guard let motion = motion, let `self` = self else { return }
-            let accel = [Float(motion.gravity.x), Float(motion.gravity.y), Float(motion.gravity.z)]
-            memcpy(self.accelerationBuffer.contents(), accel, MemoryLayout<Float>.size * 3)
-            self.acceleration = motion.gravity
+            self.acceleration.x = Float(motion.gravity.x)
+            self.acceleration.y = Float(motion.gravity.y)
+            self.acceleration.z = Float(motion.gravity.z)
+            memcpy(self.accelerationBuffer.contents(), &self.acceleration, MemoryLayout<Acceleration>.size)
         }
     }
     
@@ -165,10 +168,8 @@ extension ViewController : MTKViewDelegate
         vVolumeData[0] = volumeLevel
         
         let pData = accelerationBuffer.contents()
-        let vData = pData.bindMemory(to: Float.self, capacity: 3)
-        vData[0] = Float(acceleration.x)
-        vData[1] = Float(acceleration.y)
-        vData[2] = Float(acceleration.z)
+        let vData = pData.bindMemory(to: Acceleration.self, capacity: 1)
+        vData[0] = acceleration
 
         let renderEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: renderPassDesicriptor)
         renderEncoder?.label = "render command"

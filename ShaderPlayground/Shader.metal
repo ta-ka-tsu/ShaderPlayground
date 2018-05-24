@@ -40,11 +40,11 @@ fragment half4 fragmentShader(
   constant float2 &res[[buffer(0)]],
   constant float &time[[buffer(1)]],
   constant float &vol[[buffer(2)]],
-  constant packed_float3 &accel[[buffer(3)]])
+  constant float3 &accel[[buffer(3)]])
 {
   float2 p = fragmentIn.pos.xy/min(res.x, res.y);
-    p.x += sin(p.y * 20.0) * 0.015;
-    float2 p1 = p + float2(accel[0], -accel[1]);
+  p.x += sin(p.y * 20.0) * 0.015;
+  float2 p1 = p + float2(accel.x, -accel.y);
   float size = 0.1 * vol;
   return half4(star(p1, 3, time, size),
                star(p1, 5, sin(time) + vol, size),

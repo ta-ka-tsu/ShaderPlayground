@@ -31,7 +31,7 @@ fragment half4 fragmentShader(
   constant float2 &res[[buffer(0)]],
   constant float &time[[buffer(1)]],
   constant float &vol[[buffer(2)]],
-  constant packed_float3 &accel[[buffer(3)]])
+  constant float3 &accel[[buffer(3)]])
 {
 float2 p = fragmentIn.pos.xy/min(res.x, res.y);
   p += float2(accel[0], -accel[1]);
