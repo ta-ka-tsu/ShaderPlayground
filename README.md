@@ -13,5 +13,5 @@ iPhone上でMSLをコンパイル＆実行できます。
 
 ## Screen Shot
 
-<img src=“README_resources/editor.png”>
-<img src=“README_resources/viewer.png”>
+<img src=“README_resources/editor.jpg”>
+<img src=“README_resources/viewer.jpg”>
