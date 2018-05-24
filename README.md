@@ -10,3 +10,8 @@ iPhone上でMSLをコンパイル＆実行できます。
 * マイク音量
 * 加速度センサー
 を利用できます。
+
+## Screen Shot
+
+<img src=“README_resources/editor.png”>
+<img src=“README_resources/viewer.png”>
