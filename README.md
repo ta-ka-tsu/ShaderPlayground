@@ -11,7 +11,6 @@ iPhone上でMSLをコンパイル＆実行できます。
 * 加速度センサー
 を利用できます。
 
-## Screen Shot
+<img src="README_resources/editor.jpg" width="320">
 
-<img src=“https://github.com/ta-ka-tsu/ShaderPlayground/blob/master/README_resources/editor.jpg”>
-<img src=“https://github.com/ta-ka-tsu/ShaderPlayground/blob/master/README_resources/viewer.jpg”>
+<img src="README_resources/viewer.jpg" width="320">
