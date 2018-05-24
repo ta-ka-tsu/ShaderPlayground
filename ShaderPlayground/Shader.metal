@@ -18,7 +18,7 @@ vertex VertexOut vertexShader(
   unsigned int vid [[ vertex_id ]])
 {
   VertexOut v;
-  v.pos = float4(vertex_array[vid], 1.0, 1.0);
+  v.pos = float4(vertex_array[vid], 0.0, 1.0);
   return v;
 }
 
